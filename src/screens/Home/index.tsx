@@ -1,4 +1,28 @@
 import React from 'react';
-import { View } from 'react-native';
+import { FlatList } from 'react-native';
 
-export const Home: React.FC = () => <View />;
+import { Card } from '../../components/Card';
+
+import { Box, Text } from '../../styles';
+
+export const Home: React.FC = () => (
+  <Box flex={1}>
+    <Box flex={1} justifyContent="center" p="xl">
+      <Text variant="title">Let's eat</Text>
+      <Text variant="title">Panettone!</Text>
+    </Box>
+    <Box flex={2} alignItems="center" justifyContent="center">
+      <FlatList
+        data={[1, 2, 3, 4, 5]}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(_, index) => `${index}`}
+        renderItem={() => (
+          <Box justifyContent="center">
+            <Card />
+          </Box>
+        )}
+      />
+    </Box>
+  </Box>
+);
