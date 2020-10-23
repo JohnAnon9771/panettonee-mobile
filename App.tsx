@@ -22,7 +22,6 @@ const App: React.FC = () => {
   });
 
   if (!loaded) return null;
-
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
@@ -32,5 +31,4 @@ const App: React.FC = () => {
     </ThemeProvider>
   );
 };
-
 export default App;

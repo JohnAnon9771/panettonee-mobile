@@ -4,6 +4,7 @@ import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { Details } from '../screens/Details';
 import { Home } from '../screens/Home';
 import { theme } from '../styles';
 
@@ -73,9 +74,11 @@ const TabBottom: React.FC = () => (
 export const Routes: React.FC = () => (
   <Stack.Navigator
     initialRouteName="Home"
-    screenOptions={{ headerShown: false }}
+    screenOptions={{
+      headerShown: false,
+    }}
   >
     <Stack.Screen name="Home" component={TabBottom} />
-    <Stack.Screen name="Details" component={Home} />
+    <Stack.Screen name="Details" component={Details} />
   </Stack.Navigator>
 );

@@ -1,4 +1,15 @@
+import { ReactNode } from 'react';
+import { Image as RNImage, ImageProps } from 'react-native';
+import {
+  RectButton as RHRectButton,
+  RectButtonProperties,
+} from 'react-native-gesture-handler';
+
 import { createTheme, createBox, createText } from '@shopify/restyle';
+
+interface RectButtonProps extends RectButtonProperties {
+  children?: ReactNode;
+}
 
 const palette = {
   purpleLight: '#8C6FF7',
@@ -13,6 +24,7 @@ const palette = {
   orange: '#FE724C',
   black: '#0B0B0B',
   white: '#FFFFFF',
+  gray: '#EFEFEF',
 };
 
 const theme = createTheme({
@@ -20,6 +32,7 @@ const theme = createTheme({
     primary: palette.yellow,
     background: palette.white,
     orange: palette.orange,
+    gray: palette.gray,
   },
   spacing: {
     s: 8,
@@ -48,7 +61,7 @@ const theme = createTheme({
       fontSize: 14,
       fontFamily: 'Roboto-bold',
     },
-    subTitle: {
+    subTitleCard: {
       fontSize: 12,
       fontFamily: 'Roboto-thin',
       textAlign: 'center',
@@ -56,9 +69,21 @@ const theme = createTheme({
       marginBottom: 's',
     },
     calories: {
-      fontFamily: 'Roboto-bold',
+      fontFamily: 'Roboto-regular',
       marginLeft: 's',
       color: 'orange',
+    },
+    price: {
+      fontSize: 22,
+      fontFamily: 'Roboto-bold',
+    },
+    baPrice: {
+      color: 'primary',
+      fontSize: 16,
+    },
+    detailsTitle: {
+      fontSize: 22,
+      fontFamily: 'Roboto-regular',
     },
   },
   breakpoints: {
@@ -70,4 +95,11 @@ const theme = createTheme({
 export type Theme = typeof theme;
 export const Box = createBox<Theme>();
 export const Text = createText<Theme>();
+export const Image = createBox<Theme, ImageProps>(RNImage);
+export const RectButton = createBox<Theme, RectButtonProps>(RHRectButton);
+export const Container = createBox<Theme>();
+export const Content = createBox<Theme>();
+export const Header = createBox<Theme>();
+export const Main = createBox<Theme>();
+export const Footer = createBox<Theme>();
 export default theme;

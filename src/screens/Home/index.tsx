@@ -6,7 +6,7 @@ import { Card } from '../../components/Card';
 import { Box, Text } from '../../styles';
 
 export const Home: React.FC = () => (
-  <Box flex={1}>
+  <Box flex={1} backgroundColor="gray">
     <Box flex={1} justifyContent="center" p="xl">
       <Text variant="title">Let's eat</Text>
       <Text variant="title">Panettone!</Text>
@@ -17,9 +17,9 @@ export const Home: React.FC = () => (
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={(_, index) => `${index}`}
-        renderItem={() => (
+        renderItem={({ index }) => (
           <Box justifyContent="center">
-            <Card />
+            <Card data={{ index }} />
           </Box>
         )}
       />
