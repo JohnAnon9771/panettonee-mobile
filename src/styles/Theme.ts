@@ -1,5 +1,10 @@
 import { ReactNode } from 'react';
-import { Image as RNImage, ImageProps } from 'react-native';
+import {
+  Image as RNImage,
+  ImageProps,
+  TextInputProps,
+  TextInput,
+} from 'react-native';
 import {
   RectButton as RHRectButton,
   RectButtonProperties,
@@ -24,7 +29,9 @@ const palette = {
   orange: '#FE724C',
   black: '#0B0B0B',
   white: '#FFFFFF',
-  gray: '#EFEFEF',
+
+  grayLight: '#f8f8f8',
+  gray: '#f1f1f1',
 };
 
 const theme = createTheme({
@@ -32,6 +39,7 @@ const theme = createTheme({
     primary: palette.yellow,
     background: palette.white,
     orange: palette.orange,
+    lightgray: palette.grayLight,
     gray: palette.gray,
   },
   spacing: {
@@ -96,6 +104,7 @@ export type Theme = typeof theme;
 export const Box = createBox<Theme>();
 export const Text = createText<Theme>();
 export const Image = createBox<Theme, ImageProps>(RNImage);
+export const Input = createBox<Theme, TextInputProps>(TextInput);
 export const RectButton = createBox<Theme, RectButtonProps>(RHRectButton);
 export const Container = createBox<Theme>();
 export const Content = createBox<Theme>();

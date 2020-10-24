@@ -4,6 +4,7 @@ export {
   Box,
   Text,
   Image,
+  Input,
   RectButton,
   Container,
   Content,

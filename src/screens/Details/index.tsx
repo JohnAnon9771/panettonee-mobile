@@ -7,12 +7,11 @@ import {
   FontAwesome5,
   MaterialIcons,
 } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
 import LottieView from 'lottie-react-native';
 
 import heartAnimation from '../../assets/animations/heart.json';
 import starAnimation from '../../assets/animations/start-fav.json';
-import pImg from '../../assets/images/panettone1.png';
 import {
   Box,
   Container,
@@ -24,11 +23,20 @@ import {
   Main,
 } from '../../styles';
 
-export const Details: React.FC = () => {
+type Props = StackScreenProps<RootStackParamList, 'Details'>;
+
+export const Details: React.FC<Props> = ({ route, navigation }) => {
   const [statusHeart, setStatusHeart] = useState(false);
   const [statusStar, setStatusStar] = useState(false);
+  const {
+    name,
+    thumbnail_url,
+    calories,
+    description,
+    price,
+    weight,
+  } = route.params;
 
-  const navigation = useNavigation();
   const refStar = useRef<LottieView>(null);
   const refHeart = useRef<LottieView>(null);
 
@@ -49,7 +57,7 @@ export const Details: React.FC = () => {
   }, [statusStar]);
 
   return (
-    <Container flex={1} backgroundColor="gray">
+    <Container flex={1} backgroundColor="lightgray">
       <Box
         flex={1.5}
         position="relative"
@@ -82,7 +90,12 @@ export const Details: React.FC = () => {
             />
           </Pressable>
         </Header>
-        <Image source={pImg} resizeMode="contain" width="75%" height="75%" />
+        <Image
+          source={{ uri: thumbnail_url }}
+          resizeMode="contain"
+          width="75%"
+          height="75%"
+        />
       </Box>
       <Content
         flex={1}
@@ -125,10 +138,10 @@ export const Details: React.FC = () => {
         </Box>
         <Main width="100%" position="absolute" top={50}>
           <Box flexDirection="row" justifyContent="space-between">
-            <Text variant="detailsTitle">Panettone Bauducco</Text>
+            <Text variant="detailsTitle">{name}</Text>
             <Box flexDirection="row" alignItems="center">
               <Text variant="baPrice">$ </Text>
-              <Text variant="price">19,90</Text>
+              <Text variant="price">{price}</Text>
             </Box>
           </Box>
           <Box
@@ -150,16 +163,15 @@ export const Details: React.FC = () => {
             <Box flexDirection="row" alignItems="center">
               <FontAwesome5 name="fire-alt" size={14} color="red" />
               <Text variant="calories" style={{ color: 'black' }}>
-                70 Calorias
+                {calories} Calorias
               </Text>
             </Box>
-            <Text>10-15 min</Text>
+            <Text>{weight}</Text>
           </Box>
           <Box>
             <Text variant="titleCard">Details</Text>
             <Text variant="subTitleCard" style={{ textAlign: 'left' }}>
-              A massa com fermentação natural, que é exclusividade da Bauducco®,
-              favorece a maciez das frutas, em uma mistura puramente italiana.
+              {description}
             </Text>
           </Box>
         </Main>

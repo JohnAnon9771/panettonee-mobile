@@ -8,7 +8,7 @@ import { Details } from '../screens/Details';
 import { Home } from '../screens/Home';
 import { theme } from '../styles';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
 
 const TabBottom: React.FC = () => (

@@ -5,45 +5,38 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { createBox } from '@shopify/restyle';
 
-import pImg from '../../assets/images/panettone1.png';
 import { Box, Container, Text, Image, Theme } from '../../styles';
 
 const BoxPressable = createBox<Theme, PressableProps>(Pressable);
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-interface Props {
-  data?: {
-    // pName: string;
-    // description: string;
-    // calories: number;
-    // price: number;
-    index: number;
-  };
-}
-
-export const Card: React.FC<Props> = () => {
+export const Card: React.FC<Data> = (props) => {
+  const { name, calories, description, price, thumbnail_url } = props;
   const navigation = useNavigation();
   return (
-    // const { pName, description, calories, price } = data;
     <Container
       justifyContent="flex-end"
       alignItems="center"
       position="relative"
-      height="75%"
+      height={height * 0.45}
       width={width * 0.45}
       margin="m"
     >
       <Image
-        source={pImg}
+        source={{ uri: thumbnail_url }}
         resizeMode="contain"
         width="50%"
         height="50%"
         position="absolute"
-        top={20}
+        top={55}
         zIndex="s"
       />
       <BoxPressable
-        onPress={() => navigation.navigate('Details')}
+        onPress={() =>
+          navigation.navigate('Details', {
+            ...props,
+          })
+        }
         height="65%"
         width="100%"
         justifyContent="center"
@@ -52,11 +45,13 @@ export const Card: React.FC<Props> = () => {
         backgroundColor="background"
         position="relative"
       >
-        <Text variant="titleCard">Panettone Bauducco</Text>
-        <Text variant="subTitleCard">O Panettone Bauducco é incomparável!</Text>
+        <Text variant="titleCard">{name}</Text>
+        <Text variant="subTitleCard" numberOfLines={1}>
+          {description}
+        </Text>
         <Box flexDirection="row" alignItems="center">
           <FontAwesome5 name="fire-alt" size={14} color="red" />
-          <Text variant="calories">70 Calorias</Text>
+          <Text variant="calories">{calories} Calorias</Text>
         </Box>
         <Box
           flexDirection="row"
@@ -66,7 +61,7 @@ export const Card: React.FC<Props> = () => {
           bottom={15}
         >
           <Text variant="baPrice">$ </Text>
-          <Text variant="price">19,90</Text>
+          <Text variant="price">{price}</Text>
         </Box>
       </BoxPressable>
     </Container>
